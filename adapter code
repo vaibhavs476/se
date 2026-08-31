@@ -1,0 +1,39 @@
+interface PlacementPortal {
+    void showStudentDetails();
+}
+
+class OldPlacementSystem {
+
+    public void getOldStudentData() {
+        System.out.println("Student Name: Bhuvanesh");
+        System.out.println("Register Number: 101");
+        System.out.println("CGPA: 8.5");
+    }
+}
+
+class PlacementAdapter implements PlacementPortal {
+
+    private OldPlacementSystem oldSystem;
+
+    PlacementAdapter(OldPlacementSystem oldSystem) {
+        this.oldSystem = oldSystem;
+    }
+
+    @Override
+    public void showStudentDetails() {
+        System.out.println("Displaying Student Details in Smart Placement Portal:");
+        oldSystem.getOldStudentData();
+    }
+}
+
+public class SmartPlacementPortal {
+
+    public static void main(String[] args) {
+
+        OldPlacementSystem oldSystem = new OldPlacementSystem();
+
+        PlacementPortal portal = new PlacementAdapter(oldSystem);
+
+        portal.showStudentDetails();
+    }
+}
