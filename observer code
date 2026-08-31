@@ -1,0 +1,63 @@
+import java.util.ArrayList;
+import java.util.List;
+
+interface Student {
+    void update(String company, String jobRole);
+}
+
+class PlacementStudent implements Student {
+
+    private String name;
+
+    PlacementStudent(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void update(String company, String jobRole) {
+        System.out.println(name + " received notification:");
+        System.out.println("Company: " + company);
+        System.out.println("Job Role: " + jobRole);
+        System.out.println();
+    }
+}
+
+class PlacementPortal {
+
+    private List<Student> students = new ArrayList<>();
+
+    public void registerStudent(Student student) {
+        students.add(student);
+    }
+
+    public void notifyStudents(String company, String jobRole) {
+        for (Student student : students) {
+            student.update(company, jobRole);
+        }
+    }
+
+    public void postJob(String company, String jobRole) {
+        System.out.println("New Placement Opportunity Posted!");
+        System.out.println();
+
+        notifyStudents(company, jobRole);
+    }
+}
+
+public class SmartPlacementPortal {
+
+    public static void main(String[] args) {
+
+        PlacementPortal portal = new PlacementPortal();
+
+        Student student1 = new PlacementStudent("Bhuvanesh");
+        Student student2 = new PlacementStudent("Rahul");
+        Student student3 = new PlacementStudent("Arun");
+
+        portal.registerStudent(student1);
+        portal.registerStudent(student2);
+        portal.registerStudent(student3);
+
+        portal.postJob("TCS", "Java Developer");
+    }
+}
